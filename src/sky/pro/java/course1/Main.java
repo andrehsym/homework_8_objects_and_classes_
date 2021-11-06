@@ -1,8 +1,8 @@
 package sky.pro.java.course1;
 
-import java.util.Arrays;
-
 public class Main {
+
+    private static Book[] shelf;
 
     public static void main(String[] args) {
 
@@ -11,45 +11,53 @@ public class Main {
         Author kathy = new Author("Kathy", "Sierra");
         Book javaHeadFirst = new Book("Java Head First", 2010, kathy);
         System.out.println("Название первой книги - " + javaHeadFirst.getTitle() + ". Год издания: " + javaHeadFirst.getPublishingYear() +
-                ". Автор - " + kathy.getName() + " " + kathy.getSecondName());
+                ". Автор - " + javaHeadFirst.author.getName() + " " + javaHeadFirst.author.getSecondName());
         javaHeadFirst.setPublishingYear(2015);
         System.out.println("Новый год издания первой книги " + javaHeadFirst.getPublishingYear());
-        Author john = new Author("John", "Malkovich");
-        Book herlockSholms = new Book("Herlock Sholms", 1999, john);
-        System.out.println("Название второй книги - " + herlockSholms.getTitle() + ". Год издания - " + herlockSholms.getPublishingYear() +
-                ". Автор - " + john.getName() + " " + john.getSecondName());
+
+        Author joanne = new Author("John", "Malkovich");
+        Book harryPotter = new Book("Harry Potter", 1999, joanne);
+        System.out.println("Название второй книги - " + harryPotter.getTitle() + ". Год издания - " + harryPotter.getPublishingYear() +
+                ". Автор - " + harryPotter.author.getName() + " " + harryPotter.author.getSecondName());
+
         Author stKing = new Author("Steven", "King");
         Book stand = new Book("The Stand", 1978, stKing);
 
         //ЗАДАЧА СРЕДНЯЯ
         System.out.println(" ");
 
-        Book[] shelf = new Book[5];
-        createLibrary(shelf, javaHeadFirst);
-        createLibrary(shelf, herlockSholms);
-        createLibrary(shelf, stand);
-        printLibrary(shelf, javaHeadFirst, kathy);
-        printLibrary(shelf, herlockSholms, john);
-        printLibrary(shelf, stand, stKing);
+        shelf = new Book[5];
+
+        addBook(javaHeadFirst);
+        addBook(harryPotter);
+        addBook(stand);
+        printLibrary(javaHeadFirst, kathy);
+        printLibrary(harryPotter, joanne);
+        printLibrary(stand, stKing);
+
+
+
     }
 
-    public static Book[] createLibrary(Book[] library, Book Book) {
-        for (int i = 0; i < library.length; i++) {
-            if (library[i] == null) {
-                library[i] = Book;
+    public static void addBook(Book book) {
+
+        for (int i = 0; i < shelf.length; i++) {
+            if (shelf[i] == null) {
+                shelf[i] = book;
             }
         }
-        return library;
+
+        return ;
     }
 
-    public static Book[] printLibrary(Book[] library, Book Book, Author Author) {
-        for (int j = 0; j < library.length - 1; j++) {
+    public static void printLibrary(Book Book, Author Author) {
+        for (int j = 0; j < shelf.length - 1; j++) {
 //            if (library[j] != library[j + 1]) {
             System.out.println(Author.getName() + " " + Author.getSecondName() + ": " +
                     Book.getTitle() + ": " + Book.getPublishingYear());
             break;
 //            }
         }
-        return library;
+        return;
     }
 }
